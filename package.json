@@ -1,0 +1,23 @@
+{
+  "name": "api-rest-express-swagger",
+  "version": "1.0.0",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ayumi Muraki",
+  "license": "ISC",
+  "description": "Relacionando Petições e Pedidos no Banco de Dados",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "node": "^22.15.0",
+    "pg": "^8.15.6",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

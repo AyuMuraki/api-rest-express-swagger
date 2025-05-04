@@ -1,0 +1,52 @@
+[
+    {
+        "numero": "0001200-15.2024.5.02.0035",
+        "reclamante": "José da Silva",
+        "valorCausa": 8900.0
+    },
+    {
+        "numero": "0001345-22.2024.5.01.0020",
+        "reclamante": "Maria Aparecida Santos",
+        "valorCausa": 15200.5
+    },
+    {
+        "numero": "0001567-45.2023.5.03.0007",
+        "reclamante": "Carlos Henrique Oliveira",
+        "valorCausa": 22000.0
+    },
+    {
+        "numero": "0001987-66.2023.5.04.0088",
+        "reclamante": "Ana Lúcia Souza",
+        "valorCausa": 7300.75
+    },
+    {
+        "numero": "0002123-77.2024.5.05.0012",
+        "reclamante": "Fernanda Lima Costa",
+        "valorCausa": 18000.0
+    },
+    {
+        "numero": "0002233-88.2024.5.01.0010",
+        "reclamante": "Rafael dos Anjos",
+        "valorCausa": 9900.0
+    },
+    {
+        "numero": "0002345-99.2023.5.02.0044",
+        "reclamante": "Luciana Pereira",
+        "valorCausa": 10350.0
+    },
+    {
+        "numero": "0002456-00.2023.5.06.0099",
+        "reclamante": "Paulo Ricardo Fernandes",
+        "valorCausa": 6500.0
+    },
+    {
+        "numero": "0002567-11.2024.5.03.0022",
+        "reclamante": "Juliana Martins",
+        "valorCausa": 20500.0
+    },
+    {
+        "numero": "0002678-22.2024.5.07.0033",
+        "reclamante": "Eduardo Faria",
+        "valorCausa": 8700.0
+    }
+]

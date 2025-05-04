@@ -1,0 +1,342 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Petições Trabalhistas",
+    "version": "1.0.0",
+    "description": "API para gerenciar informações de petições trabalhistas e seus pedidos associados"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "tags": [
+    { "name": "Criação", "description": "Criar novas petições e pedidos" },
+    { "name": "Consulta", "description": "Consultar petições e seus pedidos" },
+    { "name": "Exclusão", "description": "Excluir petições e pedidos" }
+  ],
+  "paths": {
+    "/peticoes": {
+      "post": {
+        "tags": ["Criação"],
+        "summary": "Cria uma nova petição",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PeticaoInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Petição criada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Peticao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Consulta"],
+        "summary": "Lista todas as petições",
+        "responses": {
+          "200": {
+            "description": "Lista de petições retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Peticao"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/peticoes/altas": {
+      "get": {
+        "tags": ["Consulta"],
+        "summary": "Lista petições com valor acima de R$10.000",
+        "responses": {
+          "200": {
+            "description": "Lista de petições com valor alto retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Peticao"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/peticoes/{numero}": {
+      "get": {
+        "tags": ["Consulta"],
+        "summary": "Retorna detalhes de uma petição por número",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "numero",
+            "required": true,
+            "description": "Número da petição",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes da petição retornados com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Peticao"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Petição não encontrada"
+          }
+        }
+      }
+    },
+    "/peticoes/{id}": {
+      "delete": {
+        "tags": ["Exclusão"],
+        "summary": "Exclui uma petição pelo ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID da petição a ser excluída",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Petição excluída com sucesso"
+          },
+          "404": {
+            "description": "Petição não encontrada"
+          }
+        }
+      }
+    },
+    "/peticoes/{numero}/pedidos": {
+      "get": {
+        "tags": ["Consulta"],
+        "summary": "Lista todos os pedidos de uma petição",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "numero",
+            "required": true,
+            "description": "Número da petição para listar os pedidos",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de pedidos da petição retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pedido"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Petição não encontrada"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Criação"],
+        "summary": "Cria um novo pedido para uma petição",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "numero",
+            "required": true,
+            "description": "Número da petição para adicionar o pedido",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PedidoInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Pedido criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pedido"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "404": {
+            "description": "Petição não encontrada"
+          }
+        }
+      }
+    },
+    "/peticoes/{numero}/pedidos/{idPedido}": {
+      "delete": {
+        "tags": ["Exclusão"],
+        "summary": "Deleta um pedido específico de uma petição",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "numero",
+            "required": true,
+            "description": "Número da petição do pedido a ser deletado",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "idPedido",
+            "required": true,
+            "description": "ID do pedido a ser deletado",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Pedido deletado com sucesso"
+          },
+          "404": {
+            "description": "Petição ou pedido não encontrado"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Peticao": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID da petição"
+          },
+          "numero": {
+            "type": "string",
+            "description": "Número da petição"
+          },
+          "reclamante": {
+            "type": "string",
+            "description": "Nome do reclamante"
+          },
+          "valor_causa": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor da causa"
+          }
+        }
+      },
+      "PeticaoInput": {
+        "type": "object",
+        "properties": {
+          "numero": {
+            "type": "string",
+            "description": "Número da petição"
+          },
+          "reclamante": {
+            "type": "string",
+            "description": "Nome do reclamante"
+          },
+          "valor_causa": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor da causa"
+          }
+        },
+        "required": ["numero", "reclamante", "valor_causa"]
+      },
+      "Pedido": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do pedido"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição do pedido"
+          },
+          "valor": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor do pedido"
+          },
+          "peticao_id": {
+            "type": "integer",
+            "description": "ID da petição associada"
+          }
+        }
+      },
+      "PedidoInput": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string",
+            "description": "Descrição do pedido"
+          },
+          "valor": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor do pedido"
+          }
+        },
+        "required": ["descricao", "valor"]
+      }
+    }
+  }
+}
